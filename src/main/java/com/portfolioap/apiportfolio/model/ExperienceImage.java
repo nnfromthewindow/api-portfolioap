@@ -7,7 +7,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 
 @Entity
-public class AvatarImage {
+public class ExperienceImage {
+
 	@Id
 	  @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
@@ -61,4 +62,5 @@ public class AvatarImage {
 		this.userId = userId;
 	}
 
+	
 }

@@ -1,13 +1,13 @@
 package com.portfolioap.apiportfolio.model;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 
-@Entity
-public class AvatarImage {
+public class EducationImage {
+
+
 	@Id
 	  @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
@@ -60,5 +60,4 @@ public class AvatarImage {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-
 }

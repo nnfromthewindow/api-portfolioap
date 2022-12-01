@@ -13,9 +13,12 @@ public class BannerImage {
 	  @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
-	private String link;
+	private String name;
+	
+	private String type;
+	
 	@Lob
-	private byte[] linkBlob;
+	private byte[] data;
 	
 	private Integer userId;
 
@@ -27,20 +30,28 @@ public class BannerImage {
 		this.id = id;
 	}
 
-	public String getLink() {
-		return link;
+	public String getName() {
+		return name;
 	}
 
-	public void setLink(String link) {
-		this.link = link;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public byte[] getLinkBlob() {
-		return linkBlob;
+	public String getType() {
+		return type;
 	}
 
-	public void setLinkBlob(byte[] linkBlob) {
-		this.linkBlob = linkBlob;
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public byte[] getData() {
+		return data;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
 	}
 
 	public Integer getUserId() {
@@ -50,5 +61,5 @@ public class BannerImage {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-	
+
 }
