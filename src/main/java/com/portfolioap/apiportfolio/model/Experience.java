@@ -22,9 +22,7 @@ public class Experience {
 	private String color;
 	
 	private String image;
-	@Lob
-	private byte[] imageBlob;
-	
+
 	private Integer userId;
 
 	public Integer getId() {
@@ -73,14 +71,6 @@ public class Experience {
 
 	public void setImage(String image) {
 		this.image = image;
-	}
-
-	public byte[] getImageBlob() {
-		return imageBlob;
-	}
-
-	public void setImageBlob(byte[] imageBlob) {
-		this.imageBlob = imageBlob;
 	}
 
 	public Integer getUserId() {

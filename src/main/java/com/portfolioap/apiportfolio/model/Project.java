@@ -19,9 +19,7 @@ public class Project {
 	private String link;
 	
 	private String image;
-	@Lob
-	private byte[] imageBlob;
-	
+
 	private Integer userId;
 
 	public Integer getId() {
@@ -64,13 +62,6 @@ public class Project {
 		this.image = image;
 	}
 
-	public byte[] getImageBlob() {
-		return imageBlob;
-	}
-
-	public void setImageBlob(byte[] imageBlob) {
-		this.imageBlob = imageBlob;
-	}
 
 	public Integer getUserId() {
 		return userId;

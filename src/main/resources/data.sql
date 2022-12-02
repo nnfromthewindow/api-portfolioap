@@ -18,18 +18,14 @@ FOREIGN KEY (user_id) REFERENCES user(id)
 
 CREATE TABLE banner_image (
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT ,
-name VARCHAR(50) NOT NULL,
-type VARCHAR(100) NOT NULL,
-data BLOB,
+image VARCHAR (100) NOT NULL,
 user_id INT NOT NULL,
 FOREIGN KEY (user_id) REFERENCES user(id)
 )ENGINE= INNODB;
 
 CREATE TABLE avatar_image (
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-name VARCHAR(50) NOT NULL,
-type VARCHAR(100) NOT NULL,
-data BLOB,
+image VARCHAR (100) NOT NULL,
 user_id INT NOT NULL,
 FOREIGN KEY (user_id) REFERENCES user(id)
 )ENGINE= INNODB;
@@ -43,16 +39,7 @@ FOREIGN KEY (user_id) REFERENCES user(id)
 
 CREATE TABLE aboutme(
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-message VARCHAR(100) NOT NULL,
-user_id INT NOT NULL,
-FOREIGN KEY (user_id) REFERENCES user(id)
-)ENGINE= INNODB;
-
-CREATE TABLE education_image (
-id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-name VARCHAR(50) NOT NULL,
-type VARCHAR(100) NOT NULL,
-data BLOB,
+message VARCHAR(1000) NOT NULL,
 user_id INT NOT NULL,
 FOREIGN KEY (user_id) REFERENCES user(id)
 )ENGINE= INNODB;
@@ -61,34 +48,22 @@ CREATE TABLE education (
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 title VARCHAR(30) NOT NULL,
 subtitle VARCHAR(30) NOT NULL,
-detail VARCHAR(100) NOT NULL,
+detail VARCHAR(200) NOT NULL,
 color VARCHAR(20) NOT NULL,
-image_id INT NOT NULL,
-user_id INT NOT NULL,
-FOREIGN KEY (user_id) REFERENCES user(id),
-FOREIGN KEY (image_id) REFERENCES education_image(id)
-)ENGINE= INNODB;
-
-CREATE TABLE experience_image (
-id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-name VARCHAR(50) NOT NULL,
-type VARCHAR(100) NOT NULL,
-data BLOB,
+image VARCHAR (100) NOT NULL,
 user_id INT NOT NULL,
 FOREIGN KEY (user_id) REFERENCES user(id)
 )ENGINE= INNODB;
-
 
 CREATE TABLE experience (
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 title VARCHAR(30) NOT NULL,
 subtitle VARCHAR(30) NOT NULL,
-detail VARCHAR(100) NOT NULL,
+detail VARCHAR(300) NOT NULL,
 color VARCHAR(20) NOT NULL,
-image_id INT NOT NULL,
+image VARCHAR (100) NOT NULL,
 user_id INT NOT NULL,
-FOREIGN KEY (user_id) REFERENCES user(id),
-FOREIGN KEY (image_id) REFERENCES experience_image(id)
+FOREIGN KEY (user_id) REFERENCES user(id)
 )ENGINE= INNODB;
 
 CREATE TABLE skill (
@@ -101,24 +76,14 @@ user_id INT NOT NULL,
 FOREIGN KEY (user_id) REFERENCES user(id)
 )ENGINE= INNODB;
 
-CREATE TABLE project_image (
-id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-name VARCHAR(50) NOT NULL,
-type VARCHAR(100) NOT NULL,
-data BLOB,
-user_id INT NOT NULL,
-FOREIGN KEY (user_id) REFERENCES user(id)
-)ENGINE= INNODB;
-
 CREATE TABLE project (
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 title VARCHAR(30) NOT NULL,
 description VARCHAR(200) NOT NULL,
 link VARCHAR(100) NOT NULL,
-image_id INT NOT NULL,
+image VARCHAR (100) NOT NULL,
 user_id INT NOT NULL,
-FOREIGN KEY (user_id) REFERENCES user(id),
-FOREIGN KEY (image_id) REFERENCES project_image(id)
+FOREIGN KEY (user_id) REFERENCES user(id)
 )ENGINE= INNODB;
 
 
@@ -130,3 +95,34 @@ INSERT INTO network(title, icon, link, user_id)VALUES('Instagram', 'fa-brands fa
 INSERT INTO network(title, icon, link, user_id)VALUES('Spotify', 'fa-brands fa-spotify','http://spotify.com',1);
 INSERT INTO network(title, icon, link, user_id)VALUES('Oracle', 'fa-brands fa-github','http://google.com',2);
 INSERT INTO network(title, icon, link, user_id)VALUES('Argentina Programa', 'fa-brands fa-linkedin','http://reddit.com',2);
+INSERT INTO aboutme(message, user_id)VALUES('Desde muy chico siempre estuve en contacto con las computadoras desde
+    DOS y luego Windows 3.1. Con el tiempo fui adquiriendo conocimientos en
+    varios software de diseño con los cuales realizo trabajos de renders
+    para una arquitecta, (AutoCad, SketchUp, Fusion 360, Adobe Suite) y
+    producción musical (Ableton Live) debido a que soy musico. Soy
+    desarrollador web fullstack manejando, HTML, CSS, Javascript, Bootstrap
+    y frameworks como Angular y React. Manejo backend con SpringBoot además
+    de manejar su dependecia de seguridad y autenticacion JWT. Tambien
+    realice aplicaciones de escritorio con Java y JavaFX. Ultimamente estoy
+    desarrollando proyectos de Data Science poniendo en practica los cursos
+    de Machine Learning y Deep Learning realizados en Alura Latam. Como
+    segundo idioma manejo Ingles con un nivel C1 Advanced segun el EF
+    Standard English Test.',1);
+    INSERT INTO aboutme(message, user_id)VALUES('Forme parte del primer grupo de Proyecto ONE dictado por Alura Latam +
+    Oracle , realizando de manera satisfactoria todas las rutas de
+    aprendizaje y logrando tener el reconocimiento de Alura Latam como
+    ayudante ONE Helper del Grupo 3. Soy una persona que le gusta aprender
+    cosas nuevas sobre todo tecnologías, que sabe trabajar en equipo y a su
+    vez me considero emprendedor.',1);
+    INSERT INTO avatar_image (image, user_id)VALUES('https://github.com/nnfromthewindow/portafolio/blob/main/assets/img/avatar.jpg?raw=true',1);
+    INSERT INTO banner_image (image, user_id)VALUES('https://github.com/nnfromthewindow/portfolio-ap/blob/main/src/assets/img/banner.jpg?raw=true',1);
+    INSERT INTO education (title, subtitle, detail, color, image, user_id)VALUES('Alura','Formacion Fullstack', 'Cursos y challenges desarrollados durante todo el 2022 logrando conocimientos web fullstack, Java y Machine Learning', '#c2185b','https://www.aluracursos.com/assets/img/alura-share.1647533644.png',1);
+	INSERT INTO education (title, subtitle, detail, color, image, user_id)VALUES('Instituto Fortin Pavon','Bachillerato Comercial', 'Formacion de titulo secundario completo con orientacion a contabilidad y administracion de empresas', '#5632a8','https://acogeauncientifico.com/static/fortin-pavon-ee57eb4156b76e83fb2b3577f7b45ad1.jpg',1);
+    INSERT INTO experience (title, subtitle, detail, color, image, user_id)VALUES('Casino Sierra de la Ventana','Croupier', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quibusdam velit hic, at debitis voluptas impedit assumenda recusandae nostrum quidem blanditiis eius rerum, totam natus iusto quasi, accusantium nam atque?', '#FF0066','https://www.noticiastornquist.com.ar/adjuntos/2022-04/casino.jpg',1);
+	INSERT INTO experience (title, subtitle, detail, color, image, user_id)VALUES('Hostal del Arroyo','Administracion', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quibusdam velit hic, at debitis voluptas impedit assumenda recusandae nostrum quidem blanditiis eius rerum, totam natus iusto quasi, accusantium nam atque?', '#ffee00','https://live.staticflickr.com/1429/4609529146_f07d1a4585_z.jpg',1);
+	INSERT INTO project (title, description, link, image, user_id)VALUES('Encriptador de Texto', 'Aplicacion para encriptar y desencriptar texto, desarrollado con HTML, CSS y Javascript','https://nnfromthewindow.github.io/challengeencriptador/', 'https://github.com/nnfromthewindow/portafolio/blob/main/assets/img/encriptador.jpeg?raw=true',1);
+	INSERT INTO project (title, description, link, image, user_id)VALUES('Juego del Ahorcado', 'Juego clasico del ahorcado, con la posibilidad de agregar palabras nuevas haciendo uso de LocalStorage, desarrollado con HTML, CSS y Javascript','https://nnfromthewindow.github.io/challengeonejuegoahorcado/', 'https://github.com/nnfromthewindow/portafolio/blob/main/assets/img/ahorcado.jpeg?raw=true',1);  
+    INSERT INTO skill (title, percentaje, icon, color, user_id)VALUES('HTML', 80, 'fa-brands fa-html5','green',1);
+    INSERT INTO skill (title, percentaje, icon, color, user_id)VALUES('Javascript', 90, 'fa-brands fa-square-js','red',1);    
+    INSERT INTO welcome (message, user_id)VALUES('Hola! me llamo Nicolás Nuccelli y soy desarrollador de páginas y aplicaciones',1)
+    

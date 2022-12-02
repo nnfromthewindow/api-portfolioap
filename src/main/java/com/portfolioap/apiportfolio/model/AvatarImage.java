@@ -12,13 +12,8 @@ public class AvatarImage {
 	  @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
-	private String name;
-	
-	private String type;
-	
-	@Lob
-	private byte[] data;
-	
+	private String image;
+
 	private Integer userId;
 
 	public Integer getId() {
@@ -29,28 +24,12 @@ public class AvatarImage {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getImage() {
+		return image;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public byte[] getData() {
-		return data;
-	}
-
-	public void setData(byte[] data) {
-		this.data = data;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public Integer getUserId() {
