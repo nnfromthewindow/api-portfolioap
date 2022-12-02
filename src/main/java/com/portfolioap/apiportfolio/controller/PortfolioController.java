@@ -10,14 +10,14 @@ import com.portfolioap.apiportfolio.model.User;
 import com.portfolioap.apiportfolio.repository.UserRepository;
 
 @Controller
-@RequestMapping("/{username}")
+@RequestMapping("/")
 public class PortfolioController {
 
 @Autowired	
 private UserRepository userRepository;		
 
 
-@GetMapping(path="/all")
+@GetMapping
 public @ResponseBody Iterable<User> getAllUsers() {
   // This returns a JSON or XML with the users
   return userRepository.findAll();
