@@ -1,17 +1,20 @@
 package com.portfolioap.apiportfolio.model;
 
+import java.util.Optional;
+import java.util.UUID;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Experience {
 
 	@Id
-	  @GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	  @GeneratedValue(strategy=GenerationType.UUID)
+	private UUID id;
 	
 	private String title;
 	
@@ -23,13 +26,27 @@ public class Experience {
 	
 	private String image;
 
-	private Integer userId;
+	@ManyToOne
+	private Users user;
+	
+	public Experience() {};
 
-	public Integer getId() {
+	public Experience(String title, String subtitle, String detail, String color, String image,
+			Optional<Users> user) {
+	
+		this.title = title;
+		this.subtitle = subtitle;
+		this.detail = detail;
+		this.color = color;
+		this.image = image;
+		user.ifPresent(u -> this.user = u);
+	}
+
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -73,12 +90,12 @@ public class Experience {
 		this.image = image;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public Users getUser() {
+		return user;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(Users user) {
+		this.user = user;
 	}
-	
+
 }

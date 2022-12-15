@@ -1,26 +1,39 @@
 package com.portfolioap.apiportfolio.model;
 
+import java.util.Optional;
+import java.util.UUID;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity		
 public class BannerImage {
 
 	@Id
-	  @GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	  @GeneratedValue(strategy=GenerationType.UUID)
+	private UUID id;
 	
 	private String image;
 
-	private Integer userId;
+	@ManyToOne
+	private Users user;
 
-	public Integer getId() {
+	public BannerImage() {};
+	
+	public BannerImage(String image, Optional<Users> user) {
+		
+		this.image = image;
+		user.ifPresent(u -> this.user = u);
+	}
+
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -32,12 +45,12 @@ public class BannerImage {
 		this.image = image;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public Users getUser() {
+		return user;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(Users user) {
+		this.user = user;
 	}
 
 	

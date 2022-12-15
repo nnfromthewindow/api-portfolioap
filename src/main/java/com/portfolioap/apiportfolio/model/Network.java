@@ -1,16 +1,20 @@
 package com.portfolioap.apiportfolio.model;
 
+import java.util.Optional;
+import java.util.UUID;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Network {
 
 	@Id
-	  @GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	  @GeneratedValue(strategy=GenerationType.UUID)
+	private UUID id;
 	
 	private String title;
 	
@@ -18,13 +22,24 @@ public class Network {
 	
 	private String link;
 	
-	private Integer userId;
+	@ManyToOne
+	private Users user;
+	
+	public Network() {};
 
-	public Integer getId() {
+	public Network(String title, String icon, String link, Optional<Users> user) {
+	
+		this.title = title;
+		this.icon = icon;
+		this.link = link;
+		user.ifPresent(u -> this.user = u);
+	}
+
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -52,13 +67,12 @@ public class Network {
 		this.link = link;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public Users getUser() {
+		return user;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(Users user) {
+		this.user = user;
 	}
-	
 	
 }

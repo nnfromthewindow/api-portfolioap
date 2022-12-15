@@ -1,26 +1,39 @@
 package com.portfolioap.apiportfolio.model;
 
+import java.util.Optional;
+import java.util.UUID;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Welcome {
 
 	@Id
-	  @GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private UUID id;
 	
 	private String message;
 	
-	private Integer userId;
-
-	public Integer getId() {
+	@ManyToOne
+	private Users user;
+	
+	public Welcome() {};
+	
+	public Welcome(String message, Optional<Users> user) {
+	
+		this.message = message;
+		user.ifPresent(u -> this.user = u);
+	}
+	
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -32,13 +45,15 @@ public class Welcome {
 		this.message = message;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public Users getUser() {
+		return user;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(Users user) {
+		this.user = user;
 	}
+	
+
 
 	
 }
