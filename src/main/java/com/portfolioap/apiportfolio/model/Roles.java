@@ -1,15 +1,13 @@
 package com.portfolioap.apiportfolio.model;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 @Entity
-public class UsersProfile implements GrantedAuthority {
+public class Roles  {
 
-	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +15,19 @@ public class UsersProfile implements GrantedAuthority {
 
 	private String role;
 	
+	@ManyToOne
+	private Users user;
+	
+	public Roles( ) {
+	
+	}
+
+	public Roles( String role, Users user) {
+	
+		this.role = role;
+		this.user = user;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -33,10 +44,16 @@ public class UsersProfile implements GrantedAuthority {
 		this.role = role;
 	}
 
-	@Override
-	public String getAuthority() {
-		
-		return this.role;
+	public Users getUser() {
+		return user;
 	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
+	
+
+
+
 
 }

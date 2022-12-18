@@ -49,7 +49,7 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests( auth -> auth
-                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/login","/sign-up/**", "/sign-in/**").permitAll()
                         .requestMatchers("/{username}").permitAll()
                         .anyRequest().authenticated()
                 ).exceptionHandling().authenticationEntryPoint(jwtEntryPoint).and()

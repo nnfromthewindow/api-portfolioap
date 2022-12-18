@@ -1,25 +1,43 @@
 CREATE SCHEMA portfolio  DEFAULT CHARACTER SET utf8 ;
 USE portfolio;
 
-CREATE TABLE users_profile (
-id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-role VARCHAR(20) NOT NULL
-)ENGINE= INNODB;
-
-INSERT INTO users_profile(role)VALUES('ADMIN');
-INSERT INTO users_profile(role)VALUES('USER');
-
 CREATE TABLE users (
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 username VARCHAR(20) NOT NULL,
 password VARCHAR(70) NOT NULL,
-role_id INT NOT NULL,
-FOREIGN KEY(role_id) REFERENCES users_profile(id)
+email VARCHAR (70) NOT NULL,
+locked INT NOT NULL,
+enabled INT NOT NULL
 )ENGINE= INNODB;
 
-INSERT INTO users(username, password, role_id)VALUES('nuccelli', '$2a$10$dQi4w/Vav2siWmj0gccC5ei5w31m8k3C8vlTlp8aSauIVEYALbcja',1);
-INSERT INTO users(username, password, role_id)VALUES('argentina', 'Programa2022',1);
+CREATE TABLE roles (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+role VARCHAR(20) NOT NULL,
+user_id INT NOT NULL,
+FOREIGN KEY (user_id) REFERENCES users(id)
+)ENGINE= INNODB;
 
+#INSERT INTO roles(role)VALUES('ADMIN');
+#INSERT INTO roles(role)VALUES('USER');
+
+#CREATE TABLE users_roles (
+#id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+#username_id INT NOT NULL,
+#roles_id INT NOT NULL,
+#FOREIGN KEY (username_id) REFERENCES users(id),
+#FOREIGN KEY (roles_id) REFERENCES roles(id)
+#)ENGINE= INNODB;
+
+#INSERT INTO users(username, password, role_id, locked, enabled,email)VALUES('nuccelli', '$2a$10$dQi4w/Vav2siWmj0gccC5ei5w31m8k3C8vlTlp8aSauIVEYALbcja',1,0,1,"nuccelli@hotmail.com");
+#INSERT INTO users(username, password, role_id, locked, enabled,email)VALUES('argentina', 'Programa2022',1,1,0,"nuccelli87@gmail.com");
+
+CREATE TABLE confirmation_token(
+id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+confirmation_token VARCHAR(100) NOT NULL,
+created_date VARCHAR(50),
+user_id INT NOT NULL,
+FOREIGN KEY (user_id) REFERENCES users(id)
+)ENGINE= INNODB;	
 
 CREATE TABLE welcome(
 id BINARY(16) NOT NULL PRIMARY KEY,

@@ -1,10 +1,7 @@
 package com.portfolioap.apiportfolio.controller.form;
 
-import java.util.List;
-
-import com.portfolioap.apiportfolio.model.UsersProfile;
-
 import jakarta.validation.constraints.NotEmpty;
+
 
 public class NewUserForm {
 	
@@ -13,9 +10,9 @@ public class NewUserForm {
 	
 	@NotEmpty
 	private String password;
-	
+
 	@NotEmpty
-	private List<UsersProfile> roleId;
+	private String email;
 
 	public String getUsername() {
 		return username;
@@ -28,18 +25,20 @@ public class NewUserForm {
 	public String getPassword() {
 		return password;
 	}
+	
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public List<UsersProfile> getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(List<UsersProfile> roleId) {
-		this.roleId = roleId;
-	}
 
 	
 }
