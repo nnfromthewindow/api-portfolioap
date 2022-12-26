@@ -4,28 +4,30 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 @Entity
-public class Roles  {
+public class Roles {
 
-	
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	private String role;
 	
-	@ManyToOne
-	private Users user;
 	
 	public Roles( ) {
 	
 	}
 
-	public Roles( String role, Users user) {
-	
+	public Roles( String role) {
+
 		this.role = role;
-		this.user = user;
+	}
+	
+
+	public Roles(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getId() {
@@ -44,13 +46,7 @@ public class Roles  {
 		this.role = role;
 	}
 
-	public Users getUser() {
-		return user;
-	}
 
-	public void setUser(Users user) {
-		this.user = user;
-	}
 	
 
 

@@ -15,6 +15,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
 @Entity
@@ -36,6 +38,7 @@ public class Users implements UserDetails {
 	  
 	  private Boolean enabled = false;
 	  @ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	  @JoinTable(name="users_roles",joinColumns=@JoinColumn(name="user_id"),inverseJoinColumns=@JoinColumn(name="role_id"))
 	  private List<Roles> roles = new ArrayList<>(); 
 	  
 	  public Users() {
@@ -155,7 +158,9 @@ public class Users implements UserDetails {
 		this.enabled = enabled;
 	}
 
-
+	public void addRole(Roles role) {
+		this.roles.add(role);
+	}
 
 	
 	  

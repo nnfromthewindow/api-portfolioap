@@ -3,6 +3,7 @@ package com.portfolioap.apiportfolio.config.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -24,11 +25,23 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import com.portfolioap.apiportfolio.repository.UsersRepository;
+
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
+	
+  	@Autowired
+    private  AuthService userService;
+	
+	@Autowired
+	private UsersRepository usersRepository;
 	
 	@Autowired
     private JwtEntryPoint jwtEntryPoint;
@@ -38,23 +51,31 @@ public class SecurityConfig {
     
     @Bean
     public AuthenticationManager authManager(AuthService authService) {
+
         var authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(authService);
         authProvider.setPasswordEncoder(new BCryptPasswordEncoder());
+        
+   
         return new ProviderManager(authProvider);
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
+    	System.out.println(http.userDetailsService(userService));
+        return http.cors().and()
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests( auth -> auth
-                        .requestMatchers("/login","/sign-up/**", "/sign-in/**").permitAll()
-                        .requestMatchers("/{username}").permitAll()
+                        .requestMatchers("/login","/sign-up/**","/sign-in/**","/register/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**",
+                				"/v2/api-docs/**",
+                				"/swagger-resources/**", 
+                				"/swagger-ui/**", "/actuator/**").permitAll()
+                        	.requestMatchers(HttpMethod.GET,"/{username}").permitAll()
                         .anyRequest().authenticated()
                 ).exceptionHandling().authenticationEntryPoint(jwtEntryPoint).and()
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt).userDetailsService(userService)
                 .build();
     }
 

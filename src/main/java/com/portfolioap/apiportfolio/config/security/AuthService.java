@@ -1,10 +1,10 @@
 package com.portfolioap.apiportfolio.config.security;
 
-import java.util.Collections;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -38,9 +38,18 @@ public class AuthService implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		final Optional<Users> user = usersRepository.findByUsername(username);
 		
-		return user.orElseThrow(() -> new UsernameNotFoundException("Datos inválidos"));
+		final Optional<Users> optUser = usersRepository.findByUsername(username);
+		if(!optUser.isPresent()) {
+			throw new UsernameNotFoundException("Datos inválidos");
+		}
+		
+		Users userGet = optUser.get();
+		
+		UserDetails user = User.withUsername(userGet.getUsername()).password(userGet.getPassword()).authorities(userGet.getAuthorities()).build();
+		
+
+		return user;
 	}
 	
 	public void signUpUser(NewUserForm newUser) {
@@ -52,15 +61,17 @@ public class AuthService implements UserDetailsService{
 		 }
 	
 		 BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
-		
+	
 		 String encryptedPassword = bc.encode(newUser.getPassword());
 
 		 newUser.setPassword(encryptedPassword);
 		
 		Users user = new Users(newUser.getUsername(),newUser.getPassword(),newUser.getEmail());
-		Roles role = new Roles("ROLE_USER",user);
 		
-		user.setRole(Collections.singletonList(role));
+		//POR DEFECTO TODOS LOS USUARIOS QUE CREEMOS TENDRAN EL ROL DE USER
+		Roles role = rolesRepository.findByRole("USER").get();
+		user.addRole(role);
+
 		 usersRepository.save(user);
 
 		 ConfirmationToken confirmationToken = new ConfirmationToken(user);
@@ -92,7 +103,7 @@ public class AuthService implements UserDetailsService{
 		mailMessage.setSubject("Mail de Confirmacion! Activa tu Cuenta de Portfolio!");
 		mailMessage.setFrom("nuccelli87@gmail.com");
 		mailMessage.setText(
-				"Gracias por registrarte!! Para activar tu cuenta hace click en el siguiente enlace: " + "http://localhost:8080/sign-up/confirm?token="
+				"Gracias por registrarte!! Para activar tu cuenta hace click en el siguiente enlace: " + "http://localhost:8080/register/confirm?token="
 						+ token);
 		
 		emailSenderService.sendEmail(mailMessage);
