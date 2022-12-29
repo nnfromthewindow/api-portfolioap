@@ -1,7 +1,9 @@
 package com.portfolioap.apiportfolio.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -147,15 +149,36 @@ public class PortfolioService {
 				  .map(wel -> mapper.map(wel, WelcomeDTO.class))
 				  .collect(Collectors.toList());
 		
-		jsonportfolio.add(welcomeDTO);
-		jsonportfolio.add(networkDTO);
-		jsonportfolio.add(avatarImageDTO);
-		jsonportfolio.add(bannerDTO);
-		jsonportfolio.add(aboutmeDTO);
-		jsonportfolio.add(educationDTO);
-		jsonportfolio.add(experienceDTO);
-		jsonportfolio.add(projectDTO);
-		jsonportfolio.add(skillDTO);
+		
+		Map<String, Object> welcomeMap = new HashMap<>();
+		welcomeMap.put("welcome", welcomeDTO);
+		Map<String, Object> networkMap = new HashMap<>();
+		networkMap.put("network", networkDTO);
+		Map<String, Object> avatarMap = new HashMap<>();
+		avatarMap.put("avatarImage", avatarImageDTO);
+		Map<String, Object> bannerMap = new HashMap<>();
+		bannerMap.put("bannerImage", bannerDTO);
+		Map<String, Object> aboutMap = new HashMap<>();
+		aboutMap.put("aboutme", aboutmeDTO);
+		Map<String, Object> educationMap = new HashMap<>();
+		educationMap.put("education", educationDTO);
+		Map<String, Object> experienceMap = new HashMap<>();
+		experienceMap.put("experience", experienceDTO);
+		Map<String, Object> skillMap = new HashMap<>();
+		skillMap.put("skills", skillDTO);
+		Map<String, Object> projectMap = new HashMap<>();
+		projectMap.put("projects", projectDTO);
+		
+		jsonportfolio.add(welcomeMap);
+		jsonportfolio.add(networkMap);
+		jsonportfolio.add(avatarMap);
+		jsonportfolio.add(bannerMap);
+		jsonportfolio.add(aboutMap);
+		jsonportfolio.add(educationMap);
+		jsonportfolio.add(experienceMap);
+		jsonportfolio.add(skillMap);
+		jsonportfolio.add(projectMap);
+				
 		return jsonportfolio;
 		
 	};

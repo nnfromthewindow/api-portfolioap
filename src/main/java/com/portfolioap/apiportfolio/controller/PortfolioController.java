@@ -7,9 +7,11 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -68,6 +70,7 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import jakarta.validation.Valid;
 
 	@RestController
+	@CrossOrigin
 	@OpenAPIDefinition(info=@Info(title="Enpoints"))
 	@SecurityScheme(
 		    name = "bearerAuth",
@@ -86,14 +89,15 @@ import jakarta.validation.Valid;
 
   	
 	//@PreAuthorize("hasAuthority('SCOPE_USER')")
-	@GetMapping("/{username}")
+	@GetMapping(value="/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+	
 	public ResponseEntity<List<Object>> getPortfolio(@PathVariable String username) {
 		
 		Optional<Users>user= usersRepository.findByUsername(username);
 		if(!user.isPresent()) {
 	    	 HttpStatus status = HttpStatus.PERMANENT_REDIRECT;
 		    	
-	    	    URI location = URI.create("/nuccelli");
+	    	    URI location = URI.create("/argentina");
 	    	    return ResponseEntity.status(status).location(location).build();
 		}
 
