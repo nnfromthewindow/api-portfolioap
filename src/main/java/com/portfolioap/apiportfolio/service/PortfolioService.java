@@ -169,8 +169,8 @@ public class PortfolioService {
 		Map<String, Object> projectMap = new HashMap<>();
 		projectMap.put("projects", projectDTO);
 		
-		jsonportfolio.add(welcomeMap);
 		jsonportfolio.add(networkMap);
+		jsonportfolio.add(welcomeMap);
 		jsonportfolio.add(avatarMap);
 		jsonportfolio.add(bannerMap);
 		jsonportfolio.add(aboutMap);
