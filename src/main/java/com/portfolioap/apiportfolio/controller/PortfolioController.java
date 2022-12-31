@@ -97,7 +97,7 @@ import jakarta.validation.Valid;
 		if(!user.isPresent()) {
 	    	 HttpStatus status = HttpStatus.PERMANENT_REDIRECT;
 		    	
-	    	    URI location = URI.create("/argentina");
+	    	    URI location = URI.create("/nuccelli");
 	    	    return ResponseEntity.status(status).location(location).build();
 		}
 
