@@ -10,6 +10,14 @@ public class AvatarImageForm {
 	private String image;
 	
 	private String userUsername;
+	
+	
+
+	public AvatarImageForm(String image, String userUsername) {
+	
+		this.image = image;
+		this.userUsername = userUsername;
+	}
 
 	public String getImage() {
 		return image;

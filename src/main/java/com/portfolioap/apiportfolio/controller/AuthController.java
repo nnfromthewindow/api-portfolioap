@@ -39,6 +39,7 @@ public class AuthController {
 	    private  AuthService userService;
 	  	@Autowired
 	    private ConfirmationTokenService confirmationTokenService;
+	  	
 		
 	  	public AuthController(TokenService tokenService, AuthenticationManager authenticationManager,
 				AuthService userService, ConfirmationTokenService confirmationTokenService) {
@@ -53,6 +54,7 @@ public class AuthController {
 		ResponseEntity<String> signUp(@RequestBody @Valid NewUserForm newUser) {
 
 			userService.signUpUser(newUser);
+		
 
 			return new ResponseEntity<>("El usuario se ha registrado con exito!",HttpStatus.CREATED);
 		}

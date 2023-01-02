@@ -10,6 +10,14 @@ public class WelcomeForm {
 	private String message;
 	
 	private String userUsername;
+	
+	
+
+	public WelcomeForm(String message, String userUsername) {
+	
+		this.message = message;
+		this.userUsername = userUsername;
+	}
 
 	public String getMessage() {
 		return message;

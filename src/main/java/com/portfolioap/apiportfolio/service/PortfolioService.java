@@ -183,6 +183,16 @@ public class PortfolioService {
 		
 	};
 	
+	public void createDefaultPortfolio(String username) {
+		Optional<Users>user = usersRepository.findByUsername(username);
+		createWelcome(new WelcomeForm("Este es un mensaje de bienvenida", user.get().getUsername()));
+		createNetwork(new NetworkForm("GitHub", "fa-brands fa-github", "http://github.com", user.get().getUsername()));
+		createAvatarImage(new AvatarImageForm("https://images.unsplash.com/photo-1526297003708-f5a1c2c9c6e7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80", user.get().getUsername()));
+		createBannerImage(new BannerImageForm("https://images.unsplash.com/photo-1521185496955-15097b20c5fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80",  user.get().getUsername()));
+		createAboutme(new AboutmeForm("Aca podes escribir tu biografia", user.get().getUsername()));
+		
+	}
+	
 //CREACION METODOS POST PARA CADA ENDPOINT
 	
 	public Welcome createWelcome(WelcomeForm welcomeForm) {

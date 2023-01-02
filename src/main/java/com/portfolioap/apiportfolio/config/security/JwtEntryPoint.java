@@ -14,8 +14,8 @@ public class JwtEntryPoint implements AuthenticationEntryPoint{
 	
 	@Override
     public void commence(HttpServletRequest req, HttpServletResponse res, AuthenticationException e) throws IOException {
-        res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No autorizado");
-		//res.sendRedirect("/nuccelli");
+        //res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No autorizado");
+		res.sendRedirect("/nuccelli");
     }
 }
 

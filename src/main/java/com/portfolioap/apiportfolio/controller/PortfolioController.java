@@ -78,6 +78,7 @@ import jakarta.validation.Valid;
 		    bearerFormat = "JWT",
 		    scheme = "bearer"
 		)
+	
 	public class PortfolioController {
 
 	@Autowired	
@@ -86,7 +87,18 @@ import jakarta.validation.Valid;
 	@Autowired
 	private UsersRepository usersRepository;
 
-
+	@GetMapping(value="/", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Object>> getDefaultPortfolio() {
+		List<Object> result = portfolioService.portfolio("nuccelli");
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+	@GetMapping(value="{username:(?!.*swagger-ui).+}/**", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Object>> getError() {
+		
+		List<Object> result = portfolioService.portfolio("nuccelli");
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+	
   	
 	//@PreAuthorize("hasAuthority('SCOPE_USER')")
 	@GetMapping(value="/{username}", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -10,6 +10,14 @@ public class AboutmeForm {
 	private String message;
 	
 	private String userUsername;
+	
+	
+
+	public AboutmeForm(String message, String userUsername) {
+		
+		this.message = message;
+		this.userUsername = userUsername;
+	}
 
 	public String getMessage() {
 		return message;

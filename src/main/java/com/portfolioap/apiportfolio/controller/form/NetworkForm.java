@@ -14,6 +14,16 @@ public class NetworkForm {
 	private String link;
 	
 	private String userUsername;
+	
+	
+
+	public NetworkForm(String title, String icon, String link, String userUsername) {
+		
+		this.title = title;
+		this.icon = icon;
+		this.link = link;
+		this.userUsername = userUsername;
+	}
 
 	public String getTitle() {
 		return title;

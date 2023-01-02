@@ -18,6 +18,19 @@ public class EducationForm {
 	private String image;
 	
 	private String userUsername;
+	
+	
+
+	public EducationForm(String title, String subtitle, String detail, String color, String image,
+			String userUsername) {
+	
+		this.title = title;
+		this.subtitle = subtitle;
+		this.detail = detail;
+		this.color = color;
+		this.image = image;
+		this.userUsername = userUsername;
+	}
 
 	public String getTitle() {
 		return title;

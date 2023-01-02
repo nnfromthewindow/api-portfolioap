@@ -10,6 +10,14 @@ public class BannerImageForm {
 	private String image;
 	
 	private String userUsername;
+	
+	
+
+	public BannerImageForm(String image, String userUsername) {
+	
+		this.image = image;
+		this.userUsername = userUsername;
+	}
 
 	public String getImage() {
 		return image;

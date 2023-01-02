@@ -20,6 +20,7 @@ import com.portfolioap.apiportfolio.repository.RolesRepository;
 import com.portfolioap.apiportfolio.repository.UsersRepository;
 import com.portfolioap.apiportfolio.service.ConfirmationTokenService;
 import com.portfolioap.apiportfolio.service.EmailService;
+import com.portfolioap.apiportfolio.service.PortfolioService;
 @Service
 public class AuthService implements UserDetailsService{
 	
@@ -34,6 +35,9 @@ public class AuthService implements UserDetailsService{
 	
 	@Autowired
 	private EmailService emailSenderService;
+	
+	@Autowired
+  	private PortfolioService portfolioService;
 	
 
 	@Override
@@ -73,6 +77,7 @@ public class AuthService implements UserDetailsService{
 		user.addRole(role);
 
 		 usersRepository.save(user);
+		 portfolioService.createDefaultPortfolio(user.getUsername());
 
 		 ConfirmationToken confirmationToken = new ConfirmationToken(user);
 

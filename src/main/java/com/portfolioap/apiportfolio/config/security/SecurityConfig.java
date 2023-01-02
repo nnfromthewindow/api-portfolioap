@@ -66,12 +66,12 @@ public class SecurityConfig {
         return http.cors().and()
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests( auth -> auth
-                        .requestMatchers("/login","/sign-up/**","/sign-in/**","/register/**").permitAll()
+                        .requestMatchers("/login","/register/**").permitAll()
                         .requestMatchers("/v3/api-docs/**",
                 				"/v2/api-docs/**",
                 				"/swagger-resources/**", 
                 				"/swagger-ui/**", "/actuator/**").permitAll()
-                        	.requestMatchers(HttpMethod.GET,"/{username}").permitAll()
+                        	.requestMatchers(HttpMethod.GET,"/{username}", "/").permitAll()
                         .anyRequest().authenticated()
                 ).exceptionHandling().authenticationEntryPoint(jwtEntryPoint).and()
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
