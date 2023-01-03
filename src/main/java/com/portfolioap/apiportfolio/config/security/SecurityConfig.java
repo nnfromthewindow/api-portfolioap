@@ -66,7 +66,8 @@ public class SecurityConfig {
         return http.cors().and()
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests( auth -> auth
-                        .requestMatchers("/login","/register/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/login","/register/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/register/**").permitAll()
                         .requestMatchers("/v3/api-docs/**",
                 				"/v2/api-docs/**",
                 				"/swagger-resources/**", 

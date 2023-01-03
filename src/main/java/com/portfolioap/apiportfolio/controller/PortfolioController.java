@@ -93,7 +93,7 @@ import jakarta.validation.Valid;
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	@GetMapping(value="{username:(?!.*swagger-ui).+}/**", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Object>> getError() {
+	public ResponseEntity<List<Object>> getSwagger() {
 		
 		List<Object> result = portfolioService.portfolio("nuccelli");
 		return new ResponseEntity<>(result, HttpStatus.OK);
