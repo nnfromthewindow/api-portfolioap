@@ -92,13 +92,14 @@ import jakarta.validation.Valid;
 		List<Object> result = portfolioService.portfolio("nuccelli");
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
+	/*
 	@GetMapping(value="{username:(?!.*swagger-ui).+}/**", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Object>> getSwagger() {
 		
 		List<Object> result = portfolioService.portfolio("nuccelli");
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
-	
+	*/
   	
 	//@PreAuthorize("hasAuthority('SCOPE_USER')")
 	@GetMapping(value="/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
