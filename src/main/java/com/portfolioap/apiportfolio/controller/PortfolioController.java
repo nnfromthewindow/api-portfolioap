@@ -87,7 +87,7 @@ import jakarta.validation.Valid;
 	@Autowired
 	private UsersRepository usersRepository;
 
-	@GetMapping(value="/", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/*", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Object>> getDefaultPortfolio() {
 		List<Object> result = portfolioService.portfolio("nuccelli");
 		return new ResponseEntity<>(result, HttpStatus.OK);
@@ -107,7 +107,7 @@ import jakarta.validation.Valid;
 	public ResponseEntity<List<Object>> getPortfolio(@PathVariable String username) {
 		
 		Optional<Users>user= usersRepository.findByUsername(username);
-		if(!user.isPresent() && user.get().getUsername()!="login" && user.get().getUsername()!="register") {
+		if(!user.isPresent() && user.get().getUsername()!="login" && user.get().getUsername()!="register"&& user.get().getUsername()!="aboutme") {
 	    	 HttpStatus status = HttpStatus.PERMANENT_REDIRECT;
 		    	
 	    	    URI location = URI.create("/nuccelli");
