@@ -430,7 +430,13 @@ public Education updateEducation(UUID uuid, UpdateEducationForm updateEducationF
 	}
 	
 	Education education = optEducation.get();
+	education.setTitle(updateEducationForm.getTitle());
+	education.setSubtitle(updateEducationForm.getSubtitle());
+	education.setDetail(updateEducationForm.getDetail());
+	education.setColor(updateEducationForm.getColor());
 	education.setImage(updateEducationForm.getImage());
+	
+	
 	
 	return education;
 }

@@ -107,7 +107,7 @@ import jakarta.validation.Valid;
 	public ResponseEntity<List<Object>> getPortfolio(@PathVariable String username) {
 		
 		Optional<Users>user= usersRepository.findByUsername(username);
-		if(!user.isPresent() && user.get().getUsername()!="login" && user.get().getUsername()!="register"&& user.get().getUsername()!="aboutme") {
+		if(!user.isPresent() && user.get().getUsername()!="login" && user.get().getUsername()!="register") {
 	    	 HttpStatus status = HttpStatus.PERMANENT_REDIRECT;
 		    	
 	    	    URI location = URI.create("/nuccelli");
