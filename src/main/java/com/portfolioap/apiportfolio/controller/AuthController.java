@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.portfolioap.apiportfolio.config.security.AuthService;
 import com.portfolioap.apiportfolio.config.security.LoginResponse;
+import com.portfolioap.apiportfolio.config.security.RegisterResponse;
 import com.portfolioap.apiportfolio.config.security.TokenService;
 import com.portfolioap.apiportfolio.controller.form.LoginForm;
 import com.portfolioap.apiportfolio.controller.form.NewUserForm;
@@ -51,12 +52,12 @@ public class AuthController {
 		}
 	    
 	  	@PostMapping("/register")
-		ResponseEntity<String> signUp(@RequestBody @Valid NewUserForm newUser) {
+		ResponseEntity<RegisterResponse> signUp(@RequestBody @Valid NewUserForm newUser) {
 
 			userService.signUpUser(newUser);
-		
+			RegisterResponse resp = new RegisterResponse("El usuario ha sido creado con exito!!!");
 
-			return new ResponseEntity<>("El usuario se ha registrado con exito!",HttpStatus.CREATED);
+			return new ResponseEntity<RegisterResponse>(resp,HttpStatus.CREATED);
 		}
 		
 	  	
