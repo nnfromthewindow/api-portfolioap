@@ -24,6 +24,8 @@ import com.portfolioap.apiportfolio.config.security.TokenService;
 import com.portfolioap.apiportfolio.controller.form.LoginForm;
 import com.portfolioap.apiportfolio.controller.form.NewUserForm;
 import com.portfolioap.apiportfolio.model.ConfirmationToken;
+import com.portfolioap.apiportfolio.model.Users;
+import com.portfolioap.apiportfolio.repository.UsersRepository;
 import com.portfolioap.apiportfolio.service.ConfirmationTokenService;
 
 import jakarta.validation.Valid;
@@ -40,7 +42,8 @@ public class AuthController {
 	    private  AuthService userService;
 	  	@Autowired
 	    private ConfirmationTokenService confirmationTokenService;
-	  	
+	  	@Autowired
+		private UsersRepository usersRepository;
 		
 	  	public AuthController(TokenService tokenService, AuthenticationManager authenticationManager,
 				AuthService userService, ConfirmationTokenService confirmationTokenService) {
@@ -53,19 +56,27 @@ public class AuthController {
 	    
 	  	@PostMapping("/register")
 		ResponseEntity<RegisterResponse> signUp(@RequestBody @Valid NewUserForm newUser) {
+	  		
+	  		Optional<Users>user= usersRepository.findByUsername(newUser.getUsername());
+	  		if(!user.isPresent()) {
 
-			userService.signUpUser(newUser);
-			RegisterResponse resp = new RegisterResponse("El usuario ha sido creado con exito!!!");
+				userService.signUpUser(newUser);
+				RegisterResponse resp = new RegisterResponse("El usuario ha sido creado con exito!!!");
 
-			return new ResponseEntity<RegisterResponse>(resp,HttpStatus.CREATED);
-		}
+				return new ResponseEntity<RegisterResponse>(resp,HttpStatus.CREATED);
+
+	  			}else return new ResponseEntity<RegisterResponse>(HttpStatus.BAD_REQUEST);
+	  		
+	  		}
 		
 	  	
 	    @PostMapping("/login")
 	    public ResponseEntity<LoginResponse> token(@RequestBody LoginForm loginForm) throws AuthenticationException {
 	        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginForm.getUsername(), loginForm.getPassword()));
-	        LoginResponse response = new LoginResponse(loginForm.getUsername(),tokenService.generateToken(authentication));
-	        return new ResponseEntity<LoginResponse>(response,HttpStatus.OK) ;
+	        if(authentication.isAuthenticated()) {
+	        	   LoginResponse response = new LoginResponse(loginForm.getUsername(),tokenService.generateToken(authentication));
+	   	        return new ResponseEntity<LoginResponse>(response,HttpStatus.OK) ;
+	        }else return new ResponseEntity<>(HttpStatus.BAD_REQUEST) ;
 	    }
 	    
 		@GetMapping("/register/confirm")
