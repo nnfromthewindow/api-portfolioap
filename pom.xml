@@ -16,18 +16,20 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
-			   <dependencyManagement>
-   <dependencies>
-       <dependency>
-           <groupId>com.google.cloud</groupId>
-           <artifactId>spring-cloud-gcp-dependencies</artifactId>
-           <version>3.0.0</version>
-           <type>pom</type>
-           <scope>import</scope>
-       </dependency>
-   </dependencies>
-</dependencyManagement>
+
 	<dependencies>
+		<dependency>
+		    <groupId>com.google.cloud</groupId>
+		    <artifactId>spring-cloud-gcp-starter</artifactId>
+		    <version>3.4.1</version>
+		</dependency>
+
+
+		<dependency>
+		    <groupId>com.google.cloud.sql</groupId>
+		    <artifactId>mysql-socket-factory</artifactId>
+		    <version>1.8.2</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -121,18 +123,14 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-        <groupId>com.google.cloud.tools</groupId>
-        <artifactId>appengine-maven-plugin</artifactId>
-        <version>2.2.0</version>
-        <configuration>
-          <version>1</version>
-          <projectId>GCLOUD_CONFIG</projectId>
-        </configuration>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
+			<plugin>
+   <groupId>com.google.cloud.tools</groupId>
+   <artifactId>appengine-maven-plugin</artifactId>
+   <version>2.4.4</version>
+</plugin>
 		</plugins>
 		
 	</build>
