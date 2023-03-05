@@ -81,13 +81,13 @@ public class AuthService implements UserDetailsService{
 
 		 //SERVICIO DE JAVA MAIL PARA ENVIAR TOKEN DE CONFIRMACION E IMPLEMENTAR UNA LOGICA DE NEGOCIO
 		 
-		/*
+		
 		 ConfirmationToken confirmationToken = new ConfirmationToken(user);
 
 		confirmationTokenService.saveConfirmationToken(confirmationToken);
 
 		sendConfirmationMail(newUser.getEmail(), confirmationToken.getConfirmationToken());
-		 */
+		 
 
 
 	}
